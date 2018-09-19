@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android"
+	id="cordova-plugin-media-session"
+	version="1.0.0">
+	<name>Media Session</name>
+	<keywords>cordova,music,controller,controls,media,session,plugin,notification,lockscreen,now,playing</keywords>
+	<repo>https://github.com/TimeTravelersHackedMe/cordova-plugin-media-session</repo>
+	<description>Music controls and media session integration for Cordova apps (heavily modified fork of cordova-music-controls by homerous)</description>
+	<license>MIT</license>
+	<author>TimeTravelersHackedMe</author>
+
+	<engines>
+		<engine name="cordova" version=">=6.4.0"/>
+	</engines>
+
+	<asset src="www/MediaSession.js" target="js/MediaSession.js"/>
+
+	<js-module src="www/MediaSession.js" name="MediaSession">
+		<clobbers target="MediaSession" />
+	</js-module>
+
+	<!-- android -->
+	<platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="MediaSession" >
+				<param name="android-package" value="com.timetravelers.hackedme.MusicControls"/>
+			</feature>
+		</config-file>
+
+		<config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+		</config-file>
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<service android:name="com.timetravelers.hackedme.MusicControlsNotificationKiller"></service>
+		</config-file>
+
+		<source-file src="src/android/MusicControls.java" target-dir="src/com/timetravelers/hackedme" />
+		<source-file src="src/android/MediaSessionCallback.java" target-dir="src/com/timetravelers/hackedme" />
+    <source-file src="src/android/MusicControlsBroadcastReceiver.java" target-dir="src/com/timetravelers/hackedme" />
+		<source-file src="src/android/MusicControlsNotification.java" target-dir="src/com/timetravelers/hackedme" />
+		<source-file src="src/android/MusicControlsNotificationKiller.java" target-dir="src/com/timetravelers/hackedme" />
+		<source-file src="src/android/MusicControlsInfos.java" target-dir="src/com/timetravelers/hackedme" />
+		<source-file src="src/android/KillBinder.java" target-dir="src/com/timetravelers/hackedme" />
+	</platform>
+
+	<!-- windows -->
+	<platform name="windows">
+		<js-module src="src/windows/MusicControlsProxy.js" name="MusicControlsProxy">
+			<merges target="" />
+		</js-module>
+	</platform>
+
+	<platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="MusicControls">
+				<param name="ios-package" value="MusicControls" />
+			</feature>
+		</config-file>
+		<header-file src="src/ios/MainViewController+MusicControls.h" />
+		<source-file src="src/ios/MainViewController+MusicControls.m" />
+		<header-file src="src/ios/MusicControls.h" />
+		<source-file src="src/ios/MusicControls.m" />
+		<header-file src="src/ios/MusicControlsInfo.h" />
+		<source-file src="src/ios/MusicControlsInfo.m" />
+		<framework src="MediaPlayer.framework" />
+	</platform>
+
+</plugin>

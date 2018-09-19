@@ -1,0 +1,32 @@
+{
+  "author": {
+    "name": "TimeTravelersHackedMe"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TimeTravelersHackedMe/cordova-plugin-media-session"
+  },
+  "name": "cordova-plugin-media-session",
+  "version": "1.0.0",
+  "description": "Media session and notification handler (with music controls) for Cordova Android/iOS",
+  "cordova": {
+    "id": "cordova-plugin-media-session",
+    "platforms": [
+      "android",
+      "ios",
+      "browser"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-browser",
+    "media-session",
+    "media-controls",
+    "audio-controls",
+    "notification"
+  ],
+  "dependencies": {}
+}
