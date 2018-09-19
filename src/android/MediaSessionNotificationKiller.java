@@ -1,4 +1,4 @@
-package com.homerours.musiccontrols;
+package com.timetravelers.hackedme;
 
 import android.app.Service;
 import android.os.IBinder;
@@ -6,7 +6,7 @@ import android.os.Binder;
 import android.app.NotificationManager;
 import android.content.Intent;
 
-public class MusicControlsNotificationKiller extends Service {
+public class MediaSessionNotificationKiller extends Service {
 
 	private static int NOTIFICATION_ID;
 	private NotificationManager mNM;

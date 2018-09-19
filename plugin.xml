@@ -23,7 +23,7 @@
 	<platform name="android">
 		<config-file target="res/xml/config.xml" parent="/*">
 			<feature name="MediaSession" >
-				<param name="android-package" value="com.timetravelers.hackedme.MusicControls"/>
+				<param name="android-package" value="com.timetravelers.hackedme.MediaSession"/>
 			</feature>
 		</config-file>
 
@@ -32,15 +32,15 @@
 		</config-file>
 
 		<config-file target="AndroidManifest.xml" parent="/manifest/application">
-			<service android:name="com.timetravelers.hackedme.MusicControlsNotificationKiller"></service>
+			<service android:name="com.timetravelers.hackedme.MediaSessionNotificationKiller"></service>
 		</config-file>
 
-		<source-file src="src/android/MusicControls.java" target-dir="src/com/timetravelers/hackedme" />
+		<source-file src="src/android/MediaSession.java" target-dir="src/com/timetravelers/hackedme" />
 		<source-file src="src/android/MediaSessionCallback.java" target-dir="src/com/timetravelers/hackedme" />
-    <source-file src="src/android/MusicControlsBroadcastReceiver.java" target-dir="src/com/timetravelers/hackedme" />
-		<source-file src="src/android/MusicControlsNotification.java" target-dir="src/com/timetravelers/hackedme" />
-		<source-file src="src/android/MusicControlsNotificationKiller.java" target-dir="src/com/timetravelers/hackedme" />
-		<source-file src="src/android/MusicControlsInfos.java" target-dir="src/com/timetravelers/hackedme" />
+    <source-file src="src/android/MediaSessionBroadcastReceiver.java" target-dir="src/com/timetravelers/hackedme" />
+		<source-file src="src/android/MediaSessionNotification.java" target-dir="src/com/timetravelers/hackedme" />
+		<source-file src="src/android/MediaSessionNotificationKiller.java" target-dir="src/com/timetravelers/hackedme" />
+		<source-file src="src/android/MediaSessionInfos.java" target-dir="src/com/timetravelers/hackedme" />
 		<source-file src="src/android/KillBinder.java" target-dir="src/com/timetravelers/hackedme" />
 	</platform>
 

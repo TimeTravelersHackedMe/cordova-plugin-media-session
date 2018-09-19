@@ -1,4 +1,4 @@
-package com.homerours.musiccontrols;
+package com.timetravelers.hackedme;
 
 import org.apache.cordova.CordovaInterface;
 
@@ -30,18 +30,18 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.media.app.NotificationCompat.MediaStyle;
 
-public class MusicControlsNotification {
+public class MediaSessionNotification {
   private Activity cordovaActivity;
   private NotificationManager notificationManager;
   private NotificationCompat.Builder notificationBuilder;
   private int notificationID;
-  private MusicControlsInfos infos;
+  private MediaSessionInfos infos;
   private Bitmap bitmapCover;
   private String CHANNEL_ID;
-  private MusicControls musicControls;
+  private MediaSession musicControls;
 
   // Public Constructor
-  public MusicControlsNotification(Activity cordovaActivity, int id) {
+  public MediaSessionNotification(Activity cordovaActivity, int id) {
     this.CHANNEL_ID = "com.musicblobs.android.AUDIOCONTROLS";
     this.notificationID = id;
     this.cordovaActivity = cordovaActivity;
@@ -71,7 +71,7 @@ public class MusicControlsNotification {
   }
 
   // Show or update notification
-  public void updateNotification(MusicControlsInfos newInfos) {
+  public void updateNotification(MediaSessionInfos newInfos) {
     // Check if the cover has changed
     if (!newInfos.cover.isEmpty() && (this.infos == null || !newInfos.cover.equals(this.infos.cover))) {
       this.getBitmapCover(newInfos.cover);

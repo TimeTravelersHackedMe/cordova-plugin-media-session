@@ -1,5 +1,5 @@
-cordova.define("cordova-plugin-music-controls.MusicControls", function (require, exports, module) {
-  var musicControls = {
+cordova.define("cordova-plugin-music-controls.MediaSession", function (require, exports, module) {
+  var mediaSession = {
     updateCallback: function () {},
 
     create: function (data, successCallback, errorCallback) {
@@ -32,7 +32,7 @@ cordova.define("cordova-plugin-music-controls.MusicControls", function (require,
       data.closeIcon = !isUndefined(data.closeIcon) ? data.closeIcon : "";
       data.notificationIcon = !isUndefined(data.notificationIcon) ? data.notificationIcon : "";
 
-      cordova.exec(successCallback, errorCallback, "MusicControls", "create", [
+      cordova.exec(successCallback, errorCallback, "MediaSession", "create", [
         data
       ]);
     },
@@ -41,7 +41,7 @@ cordova.define("cordova-plugin-music-controls.MusicControls", function (require,
       cordova.exec(
         successCallback,
         errorCallback,
-        "MusicControls",
+        "MediaSession",
         "updateIsPlaying",
         [{
           isPlaying: isPlaying
@@ -52,7 +52,7 @@ cordova.define("cordova-plugin-music-controls.MusicControls", function (require,
       cordova.exec(
         successCallback,
         errorCallback,
-        "MusicControls",
+        "MediaSession",
         "updateElapsed",
         [{
           elapsed: args.elapsed,
@@ -64,7 +64,7 @@ cordova.define("cordova-plugin-music-controls.MusicControls", function (require,
       cordova.exec(
         successCallback,
         errorCallback,
-        "MusicControls",
+        "MediaSession",
         "updateDismissable",
         [{
           dismissable: dismissable
@@ -76,7 +76,7 @@ cordova.define("cordova-plugin-music-controls.MusicControls", function (require,
       cordova.exec(
         successCallback,
         errorCallback,
-        "MusicControls",
+        "MediaSession",
         "destroy",
         []
       );
@@ -86,7 +86,7 @@ cordova.define("cordova-plugin-music-controls.MusicControls", function (require,
       cordova.exec(
         successCallback,
         errorCallback,
-        "MusicControls",
+        "MediaSession",
         "position",
         [{
           time: position
@@ -96,24 +96,24 @@ cordova.define("cordova-plugin-music-controls.MusicControls", function (require,
 
     // Register callback
     subscribe: function (onUpdate) {
-      musicControls.updateCallback = onUpdate;
+      mediaSession.updateCallback = onUpdate;
     },
     // Start listening for events
     listen: function () {
       cordova.exec(
-        musicControls.receiveCallbackFromNative,
+        mediaSession.receiveCallbackFromNative,
         function (res) {},
-        "MusicControls",
+        "MediaSession",
         "watch",
         []
       );
     },
     receiveCallbackFromNative: function (messageFromNative) {
-      musicControls.updateCallback(messageFromNative);
+      mediaSession.updateCallback(messageFromNative);
       cordova.exec(
-        musicControls.receiveCallbackFromNative,
+        mediaSession.receiveCallbackFromNative,
         function (res) {},
-        "MusicControls",
+        "MediaSession",
         "watch",
         []
       );
@@ -124,5 +124,5 @@ cordova.define("cordova-plugin-music-controls.MusicControls", function (require,
     return val === undefined;
   }
 
-  module.exports = musicControls;
+  module.exports = mediaSession;
 });

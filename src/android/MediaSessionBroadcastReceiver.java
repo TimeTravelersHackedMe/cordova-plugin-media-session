@@ -1,4 +1,4 @@
-package com.homerours.musiccontrols;
+package com.timetravelers.hackedme;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -11,12 +11,12 @@ import android.os.Bundle;
 import android.content.BroadcastReceiver;
 import android.view.KeyEvent;
 
-public class MusicControlsBroadcastReceiver extends BroadcastReceiver {
+public class MediaSessionBroadcastReceiver extends BroadcastReceiver {
 	private CallbackContext cb;
-	private MusicControls musicControls;
+	private MediaSession musicControls;
 
 
-	public MusicControlsBroadcastReceiver(MusicControls musicControls){
+	public MediaSessionBroadcastReceiver(MediaSession musicControls){
 		this.musicControls=musicControls;
 	}
 

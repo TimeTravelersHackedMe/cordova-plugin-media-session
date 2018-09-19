@@ -1,4 +1,4 @@
-package com.homerours.musiccontrols;
+package com.timetravelers.hackedme;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -40,9 +40,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MusicControls extends CordovaPlugin {
-  private MusicControlsBroadcastReceiver mMessageReceiver;
-  private MusicControlsNotification notification;
+public class MediaSession extends CordovaPlugin {
+  private MediaSessionBroadcastReceiver mMessageReceiver;
+  private MediaSessionNotification notification;
   public static MediaSessionCompat mediaSessionCompat;
   private final int notificationID = 7824;
   private AudioManager mAudioManager;
@@ -55,7 +55,7 @@ public class MusicControls extends CordovaPlugin {
 
   private MediaSessionCallback mMediaSessionCallback = new MediaSessionCallback();
 
-  private void registerBroadcaster(MusicControlsBroadcastReceiver mMessageReceiver) {
+  private void registerBroadcaster(MediaSessionBroadcastReceiver mMessageReceiver) {
     final Context context = this.cordova.getActivity().getApplicationContext();
     context.registerReceiver((BroadcastReceiver) mMessageReceiver, new IntentFilter("music-controls-previous"));
     context.registerReceiver((BroadcastReceiver) mMessageReceiver, new IntentFilter("music-controls-pause"));
@@ -106,8 +106,8 @@ public class MusicControls extends CordovaPlugin {
 
     this.cordovaActivity = activity;
 
-    this.notification = new MusicControlsNotification(activity, this.notificationID);
-    this.mMessageReceiver = new MusicControlsBroadcastReceiver(this);
+    this.notification = new MediaSessionNotification(activity, this.notificationID);
+    this.mMessageReceiver = new MediaSessionBroadcastReceiver(this);
     this.registerBroadcaster(mMessageReceiver);
 
     this.mediaSessionCompat = new MediaSessionCompat(context, "cordova-music-controls-media-session", null,
@@ -135,13 +135,13 @@ public class MusicControls extends CordovaPlugin {
     // Notification Killer
     ServiceConnection mConnection = new ServiceConnection() {
       public void onServiceConnected(ComponentName className, IBinder binder) {
-        ((KillBinder) binder).service.startService(new Intent(activity, MusicControlsNotificationKiller.class));
+        ((KillBinder) binder).service.startService(new Intent(activity, MediaSessionNotificationKiller.class));
       }
 
       public void onServiceDisconnected(ComponentName className) {
       }
     };
-    Intent startServiceIntent = new Intent(activity, MusicControlsNotificationKiller.class);
+    Intent startServiceIntent = new Intent(activity, MediaSessionNotificationKiller.class);
     startServiceIntent.putExtra("notificationID", this.notificationID);
     activity.bindService(startServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
   }
@@ -153,7 +153,7 @@ public class MusicControls extends CordovaPlugin {
     final Activity activity = this.cordova.getActivity();
 
     if (action.equals("create")) {
-      final MusicControlsInfos infos = new MusicControlsInfos(args);
+      final MediaSessionInfos infos = new MediaSessionInfos(args);
       final MediaMetadataCompat.Builder metadataBuilder = new MediaMetadataCompat.Builder();
 
       this.cordova.getThreadPool().execute(new Runnable() {
