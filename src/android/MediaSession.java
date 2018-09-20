@@ -48,7 +48,7 @@ public class MediaSession extends CordovaPlugin {
   private AudioManager mAudioManager;
   private PendingIntent mediaButtonPendingIntent;
   private boolean mediaButtonAccess = true;
-  private int position = 0;
+  private long position = 0;
   private int lastState;
 
   private Activity cordovaActivity;
@@ -223,9 +223,11 @@ public class MediaSession extends CordovaPlugin {
       this.position = params.getLong("time");
       setMediaPlaybackState(this.lastState);
       // this.notification.updatePosition(this.position);
+      callbackContext.success("success");
     } else if (action.equals("login")) {
       Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
       context.sendBroadcast(it);
+      callbackContext.success("success");
     }
     return true;
   }
