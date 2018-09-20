@@ -92,7 +92,15 @@ var mediaSession = {
       }]
     );
   },
-
+  login: function(successCallback, errorCallback) {
+    cordova.exec(
+      successCallback,
+      errorCallback,
+      "MediaSession",
+      "login",
+      []
+    );
+  },
   // Register callback
   subscribe: function (onUpdate) {
     mediaSession.updateCallback = onUpdate;

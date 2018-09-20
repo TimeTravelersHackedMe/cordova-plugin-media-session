@@ -62,7 +62,7 @@ public class MediaSessionNotification {
       // Configure the notification channel.
       mChannel.setSound(null, null);
       mChannel.setDescription(description);
-      mChannel.enableVibration(true);
+      mChannel.enableVibration(false);
       mChannel.setLightColor(Color.GREEN);
       mChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
       this.notificationManager.createNotificationChannel(mChannel);
@@ -85,6 +85,14 @@ public class MediaSessionNotification {
   // Toggle the play/pause button
   public void updateIsPlaying(boolean isPlaying) {
     this.infos.isPlaying = isPlaying;
+    this.createBuilder();
+    Notification noti = this.notificationBuilder.build();
+    this.notificationManager.notify(this.notificationID, noti);
+  }
+
+  public void updatePosition(long position) {
+    Integer elapsed = (int) (long) position;
+    this.infos.elapsed = position;
     this.createBuilder();
     Notification noti = this.notificationBuilder.build();
     this.notificationManager.notify(this.notificationID, noti);
@@ -183,8 +191,10 @@ public class MediaSessionNotification {
     if (!infos.ticker.isEmpty()) {
       builder.setTicker(infos.ticker);
     }
-
-    builder.setPriority(Notification.PRIORITY_LOW);
+    Integer duration = (int) (long) infos.duration;
+    Integer elapsed = (int) (long) infos.elapsed;
+    builder.setProgress(duration, elapsed, false);
+    builder.setPriority(Notification.PRIORITY_HIGH);
 
     // If 5.0 >= set the controls to be visible on lockscreen
     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {

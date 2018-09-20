@@ -10,6 +10,7 @@ public class MediaSessionInfos {
   public String album;
   public String date;
   public long duration;
+  public long elapsed;
   public String ticker;
   public String genre;
   public String cover;
@@ -36,6 +37,7 @@ public class MediaSessionInfos {
     this.album = params.getString("album");
     this.date = params.getString("date");
     this.duration = params.getLong("duration");
+    this.elapsed = params.getLong("elapsed");
     this.trackid = params.getString("trackid");
     this.genre = params.getString("genre");
     this.rating = params.getBoolean("rating");

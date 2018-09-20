@@ -171,7 +171,8 @@ public class MediaSession extends CordovaPlugin {
           metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_GENRE, infos.genre);
           metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, infos.trackid);
           metadataBuilder.putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, infos.mediauri);
-          metadataBuilder.putRating(MediaMetadataCompat.METADATA_KEY_USER_RATING, RatingCompat.newHeartRating(infos.rating));
+          metadataBuilder.putRating(MediaMetadataCompat.METADATA_KEY_USER_RATING,
+              RatingCompat.newHeartRating(infos.rating));
           Bitmap art = getBitmapCover(infos.cover);
           if (art != null) {
             metadataBuilder.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, art);
@@ -219,8 +220,12 @@ public class MediaSession extends CordovaPlugin {
       });
     } else if (action.equals("position")) {
       final JSONObject params = args.getJSONObject(0);
-      this.position = params.getInt("time");
-      this.setMediaPlaybackState(this.lastState);
+      this.position = params.getLong("time");
+      setMediaPlaybackState(this.lastState);
+      // this.notification.updatePosition(this.position);
+    } else if (action.equals("login")) {
+      Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+      context.sendBroadcast(it);
     }
     return true;
   }
