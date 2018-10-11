@@ -55,7 +55,7 @@ public class MediaSessionNotification {
       // The user-visible description of the channel.
       String description = "Displays an audio control notification in the status pane. Allows user to play, pause, skip, favorite, or navigate to the app.";
 
-      int importance = NotificationManager.IMPORTANCE_HIGH;
+      int importance = NotificationManager.IMPORTANCE_DEFAULT;
 
       NotificationChannel mChannel = new NotificationChannel(this.CHANNEL_ID, name, importance);
 
@@ -194,7 +194,7 @@ public class MediaSessionNotification {
     Integer duration = (int) (long) infos.duration;
     Integer elapsed = (int) (long) infos.elapsed;
     builder.setProgress(duration, elapsed, false);
-    builder.setPriority(Notification.PRIORITY_HIGH);
+    builder.setPriority(Notification.PRIORITY_DEFAULT);
 
     // If 5.0 >= set the controls to be visible on lockscreen
     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
